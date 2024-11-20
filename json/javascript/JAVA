@@ -1,0 +1,69 @@
+// Ambil elemen-elemen yang diperlukan
+const ratingBtns = document.querySelectorAll(".rating-btn");
+const submitBtn = document.getElementById("submit");
+const nameInput = document.getElementById("name");
+const commentInput = document.getElementById("comment");
+const reviewsContainer = document.getElementById("reviews");
+
+// Fungsi untuk menyimpan review ke LocalStorage
+function saveReview(name, rating, comment) {
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  reviews.push({ name, rating, comment });
+  localStorage.setItem("reviews", JSON.stringify(reviews));
+}
+
+// Fungsi untuk menampilkan review dari LocalStorage
+function displayReviews() {
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  reviewsContainer.innerHTML = ""; // Kosongkan dulu sebelum menampilkan
+
+  reviews.forEach((review) => {
+    const reviewElement = document.createElement("div");
+    reviewElement.classList.add("bg-gray-100", "p-4", "rounded", "shadow-sm");
+    reviewElement.innerHTML = `
+      <p><strong>${review.name}</strong> (${review.rating}⭐)</p>
+      <p>${review.comment}</p>
+    `;
+    reviewsContainer.appendChild(reviewElement);
+  });
+}
+
+// Fungsi untuk memilih rating
+ratingBtns.forEach((button) => {
+  button.addEventListener("click", () => {
+    // Reset semua bintang yang dipilih
+    ratingBtns.forEach((btn) => btn.classList.remove("selected"));
+
+    // Tandai bintang yang dipilih
+    button.classList.add("selected");
+  });
+});
+
+// Submit button event listener
+submitBtn.addEventListener("click", () => {
+  const name = nameInput.value.trim();
+  const rating = document
+    .querySelector(".rating-btn.selected")
+    ?.getAttribute("data-value");
+  const comment = commentInput.value.trim();
+
+  // Validasi input
+  if (!name || !rating || !comment) {
+    alert("Semua kolom harus diisi!");
+    return;
+  }
+
+  // Simpan review ke LocalStorage
+  saveReview(name, rating, comment);
+
+  // Reset form
+  nameInput.value = "";
+  commentInput.value = "";
+  ratingBtns.forEach((btn) => btn.classList.remove("selected"));
+
+  // Tampilkan review yang telah disubmit
+  displayReviews();
+});
+
+// Tampilkan review ketika halaman dimuat
+displayReviews();

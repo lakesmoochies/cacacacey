@@ -1,0 +1,41 @@
+// Fungsi untuk mengambil data dari file JSON
+async function fetchItems() {
+  const response = await fetch("items.json"); // Gantilah path jika file JSON ada di lokasi berbeda
+  const data = await response.json();
+  return data;
+}
+
+// Menggunakan data JSON untuk pencarian
+async function searchItems(event) {
+  event.preventDefault(); // Mencegah form untuk reload halaman
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  const items = await fetchItems(); // Ambil data barang dari JSON
+  const results = items.filter((item) =>
+    item.name.toLowerCase().includes(query)
+  );
+
+  // Menampilkan hasil pencarian
+  const resultsList = document.getElementById("resultsList");
+  resultsList.innerHTML = ""; // Kosongkan hasil pencarian sebelumnya
+
+  if (results.length === 0) {
+    resultsList.innerHTML =
+      "<li class='text-red-600'>Tidak ada barang yang cocok dengan pencarian Anda.</li>";
+  } else {
+    results.forEach((item) => {
+      const listItem = document.createElement("li");
+      listItem.classList.add(
+        "p-3",
+        "bg-gray-100",
+        "rounded-md",
+        "mt-2",
+        "shadow-sm",
+        "text-black"
+      );
+      listItem.textContent = `${item.name} - Rp ${item.price.toLocaleString()}`;
+      resultsList.appendChild(listItem);
+    });
+  }
+}
+
+document.getElementById("searchForm").addEventListener("submit", searchItems);

@@ -1,0 +1,13 @@
+.rating-btn {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.rating-btn.selected {
+  color: gold;
+}
+
+textarea,
+input[type="text"] {
+  color: black; /* Menjadikan teks input berwarna hitam */
+}

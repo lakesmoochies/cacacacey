@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Cara Belanja</title>
+  </head>
+  <body>
+    <body>
+      <!-- info -->
+      <div class="bg-neutral-500 px-4 py-3 text-white">
+        <p class="text-center text-sm font-medium">
+          Berlangganan aplikasi premium murah?
+          <a href="#" class="inline-block underline"
+            >Check out this new course!</a
+          >
+
+          <!-- NAVBAR -->
+        </p>
+
+        <header class="border-b border-gray-200 bg-gray-50">
+          <div
+            class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8"
+          >
+            <div
+              class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between"
+            >
+              <div>
+                <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
+                  AWOKAWOK STORE
+                </h1>
+
+                <p class="mt-1.5 text-sm text-gray-500">
+                  Premium murah, bergaransi, terjangkau.
+                </p>
+              </div>
+              <!-- RATING -->
+              <!DOCTYPE html>
+              <html lang="id">
+                <head>
+                  <meta charset="UTF-8" />
+                  <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                  />
+                  <title>Rating Produk</title>
+                  <style>
+                    body {
+                      font-family: Arial, sans-serif;
+                      background-color: #f4f4f9;
+                      margin: 0;
+                      padding: 0;
+                    }
+
+                    .container {
+                      max-width: 600px;
+                      margin: 50px auto;
+                      padding: 20px;
+                      background-color: #fff;
+                      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                      border-radius: 8px;
+                    }
+
+                    h1 {
+                      text-align: center;
+                      color: #333;
+                    }
+
+                    .rating-container {
+                      display: flex;
+                      justify-content: center;
+                      gap: 10px;
+                    }
+
+                    .star {
+                      font-size: 40px;
+                      color: #ddd;
+                      cursor: pointer;
+                    }
+
+                    .star:hover,
+                    .star.selected {
+                      color: #ffcc00;
+                    }
+
+                    .comment-box {
+                      margin-top: 20px;
+                    }
+
+                    .comment-box input,
+                    .comment-box textarea {
+                      width: 100%;
+                      padding: 10px;
+                      margin: 5px 0;
+                      border: 1px solid #ddd;
+                      border-radius: 5px;
+                      color: black; /* Menetapkan warna teks menjadi hitam */
+                      font-size: 16px; /* Menetapkan ukuran font */
+                      background-color: #fff;
+                    }
+
+                    .comment-box button {
+                      background-color: #4caf50;
+                      color: white;
+                      padding: 10px;
+                      border: none;
+                      border-radius: 5px;
+                      cursor: pointer;
+                    }
+
+                    .comment-box button:hover {
+                      background-color: #45a049;
+                    }
+
+                    .comments-list {
+                      margin-top: 30px;
+                    }
+
+                    .comment-item {
+                      background-color: #f9f9f9;
+                      padding: 10px;
+                      margin: 5px 0;
+                      border-radius: 5px;
+                      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                      color: black; /* Menetapkan warna teks komentar menjadi hitam */
+                      font-size: 16px; /* Menetapkan ukuran font */
+                    }
+
+                    .comment-item .rating {
+                      color: #ffcc00;
+                    }
+                  </style>
+                </head>
+                <body>
+                  <div class="container">
+                    <h1>Berikan Rating dan Komentar</h1>
+
+                    <!-- Rating Section -->
+                    <div class="rating-container">
+                      <span class="star" data-value="1">&#9733;</span>
+                      <span class="star" data-value="2">&#9733;</span>
+                      <span class="star" data-value="3">&#9733;</span>
+                      <span class="star" data-value="4">&#9733;</span>
+                      <span class="star" data-value="5">&#9733;</span>
+                    </div>
+
+                    <!-- Comment Box -->
+                    <div class="comment-box">
+                      <input type="text" id="name" placeholder="Nama Anda" />
+                      <textarea
+                        id="comment"
+                        rows="4"
+                        placeholder="Tulis komentar Anda..."
+                      ></textarea>
+                      <button id="submitComment">Kirim Komentar</button>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div class="comments-list" id="commentsList">
+                      <!-- Komentar akan muncul di sini -->
+                    </div>
+                  </div>
+
+                  <script>
+                    const stars = document.querySelectorAll(".star");
+                    let selectedRating = 0;
+
+                    // Function to highlight stars based on the rating
+                    stars.forEach((star) => {
+                      star.addEventListener("click", () => {
+                        selectedRating = parseInt(
+                          star.getAttribute("data-value")
+                        );
+                        updateStars();
+                      });
+
+                      star.addEventListener("mouseover", () => {
+                        const value = parseInt(star.getAttribute("data-value"));
+                        highlightStars(value);
+                      });
+
+                      star.addEventListener("mouseout", () => {
+                        highlightStars(selectedRating);
+                      });
+                    });
+
+                    // Function to update the star colors
+                    function highlightStars(rating) {
+                      stars.forEach((star) => {
+                        const value = parseInt(star.getAttribute("data-value"));
+                        if (value <= rating) {
+                          star.classList.add("selected");
+                        } else {
+                          star.classList.remove("selected");
+                        }
+                      });
+                    }
+
+                    function updateStars() {
+                      highlightStars(selectedRating);
+                    }
+
+                    // Function to get stored comments from localStorage
+                    function getStoredComments() {
+                      const storedComments = localStorage.getItem("comments");
+                      return storedComments ? JSON.parse(storedComments) : [];
+                    }
+
+                    // Function to save comments to localStorage
+                    function saveComments(comments) {
+                      localStorage.setItem(
+                        "comments",
+                        JSON.stringify(comments)
+                      );
+                    }
+
+                    // Load stored comments and display them
+                    function displayComments() {
+                      const comments = getStoredComments();
+                      const commentsList =
+                        document.getElementById("commentsList");
+                      commentsList.innerHTML = ""; // Clear existing comments
+                      comments.forEach((comment) => {
+                        const commentItem = document.createElement("div");
+                        commentItem.classList.add("comment-item");
+                        commentItem.innerHTML = `
+                <div><strong>${
+                  comment.name
+                }</strong> memberikan rating <span class="rating">${"★".repeat(
+                          comment.rating
+                        )}</span></div>
+                <div>${comment.comment}</div>
+            `;
+                        commentsList.appendChild(commentItem);
+                      });
+                    }
+
+                    // Handle comment submission
+                    document
+                      .getElementById("submitComment")
+                      .addEventListener("click", () => {
+                        const name = document.getElementById("name").value;
+                        const comment =
+                          document.getElementById("comment").value;
+
+                        if (name && comment && selectedRating > 0) {
+                          const newComment = {
+                            name: name,
+                            rating: selectedRating,
+                            comment: comment,
+                          };
+
+                          // Get existing comments, add the new one, and save them
+                          const comments = getStoredComments();
+                          comments.push(newComment);
+                          saveComments(comments);
+
+                          // Clear inputs after submission
+                          document.getElementById("name").value = "";
+                          document.getElementById("comment").value = "";
+                          selectedRating = 0;
+                          updateStars();
+
+                          // Re-display all comments
+                          displayComments();
+                        } else {
+                          alert("Harap isi nama, komentar, dan pilih rating!");
+                        }
+                      });
+
+                    // Display comments when the page loads
+                    window.onload = displayComments;
+                  </script>
+                </body>
+              </html>
+            </div>
+          </div>
+        </header>
+      </div>
+    </body>
+  </body>
+</html>
